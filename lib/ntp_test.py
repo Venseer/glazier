@@ -14,17 +14,21 @@
 
 """Tests for glazier.lib.ntp."""
 
+import os
+import time
 from glazier.lib import ntp
 import mock
-import unittest
+from google.apputils import basetest
 
 
-class NtpTest(unittest.TestCase):
+class NtpTest(basetest.TestCase):
 
   @mock.patch.object(ntp.time, 'sleep', autospec=True)
   @mock.patch.object(ntp.subprocess, 'call', autospec=True)
   @mock.patch.object(ntp.ntplib.NTPClient, 'request', autospec=True)
   def testSyncClockToNtp(self, request, subproc, sleep):
+    os.environ['TZ'] = 'UTC'
+    time.tzset()
     return_time = mock.Mock()
     return_time.ref_time = 1453220630.64458
     request.side_effect = iter([None, None, None, return_time])
@@ -38,8 +42,7 @@ class NtpTest(unittest.TestCase):
     subproc.assert_has_calls([
         mock.call(
             r'X:\Windows\System32\cmd.exe /c date 01-19-2016', shell=True),
-        mock.call(
-            r'X:\Windows\System32\cmd.exe /c time 08:23:50', shell=True)
+        mock.call(r'X:\Windows\System32\cmd.exe /c time 16:23:50', shell=True)
     ])
     # Socket Error
     request.side_effect = ntp.socket.gaierror
@@ -50,4 +53,4 @@ class NtpTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-  unittest.main()
+  basetest.main()

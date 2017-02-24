@@ -14,13 +14,13 @@
 
 """Tests for glazier.lib.config.files."""
 
-from fakefs import fake_filesystem
+from pyfakefs import fake_filesystem
 from glazier.lib.config import files
 import mock
-import unittest
+from google.apputils import basetest
 
 
-class FilesTest(unittest.TestCase):
+class FilesTest(basetest.TestCase):
 
   def setUp(self):
     self.filesystem = fake_filesystem.FakeFilesystem()
@@ -63,4 +63,4 @@ class FilesTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-  unittest.main()
+  basetest.main()

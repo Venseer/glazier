@@ -14,12 +14,12 @@
 
 """Tests for glazier.lib.file_util."""
 
-from fakefs import fake_filesystem
+from pyfakefs import fake_filesystem
 from glazier.lib import file_util
-import unittest
+from google.apputils import basetest
 
 
-class FileUtilTest(unittest.TestCase):
+class FileUtilTest(basetest.TestCase):
 
   def setUp(self):
     self.filesystem = fake_filesystem.FakeFilesystem()

@@ -14,15 +14,15 @@
 
 """Tests for glazier.lib.config.runner."""
 
-from fakefs import fake_filesystem
-from fakefs import fake_filesystem_shutil
+from pyfakefs import fake_filesystem
+from pyfakefs import fake_filesystem_shutil
 from glazier.lib import buildinfo
 from glazier.lib.config import runner
 import mock
-import unittest
+from google.apputils import basetest
 
 
-class ConfigRunnerTest(unittest.TestCase):
+class ConfigRunnerTest(basetest.TestCase):
 
   def setUp(self):
     self.buildinfo = buildinfo.BuildInfo()
@@ -125,4 +125,4 @@ class ConfigRunnerTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-  unittest.main()
+  basetest.main()

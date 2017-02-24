@@ -15,12 +15,12 @@
 """Tests for glazier.lib.buildinfo."""
 
 import datetime
-from fakefs import fake_filesystem
+from pyfakefs import fake_filesystem
 from glazier.lib import buildinfo
 from gwinpy.wmi.hw_info import DeviceId
 import mock
 import yaml
-import unittest
+from google.apputils import basetest
 
 _RELEASE_INFO = """
 supported_models:
@@ -43,7 +43,7 @@ versions:
 """
 
 
-class BuildInfoTest(unittest.TestCase):
+class BuildInfoTest(basetest.TestCase):
 
   def setUp(self):
     # fake filesystem
@@ -494,4 +494,4 @@ class BuildInfoTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-  unittest.main()
+  basetest.main()

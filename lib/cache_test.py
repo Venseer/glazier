@@ -15,20 +15,20 @@
 """Tests for glazier.lib.cache."""
 
 import os
-from fakefs import fake_filesystem
+from pyfakefs import fake_filesystem
 from glazier.lib import cache
 import mock
-import unittest
+from google.apputils import basetest
 
 
-class CacheTest(unittest.TestCase):
+class CacheTest(basetest.TestCase):
 
   def setUp(self):
     self.cache = cache.Cache()
-    fakefs = fake_filesystem.FakeFilesystem()
-    fakefs.CreateDirectory(r'C:\Directory')
-    os_module = fake_filesystem.FakeOsModule(fakefs)
-    self.mock_open = fake_filesystem.FakeFileOpen(fakefs)
+    fs = fake_filesystem.FakeFilesystem()
+    fs.CreateDirectory(r'C:\Directory')
+    os_module = fake_filesystem.FakeOsModule(fs)
+    self.mock_open = fake_filesystem.FakeFileOpen(fs)
     cache.os = os_module
     cache.open = self.mock_open
 
@@ -83,4 +83,4 @@ class CacheTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-  unittest.main()
+  basetest.main()

@@ -14,13 +14,13 @@
 
 """Tests for glazier.lib.powershell."""
 
-from fakefs import fake_filesystem
+from pyfakefs import fake_filesystem
 from glazier.lib import powershell
 import mock
-import unittest
+from google.apputils import basetest
 
 
-class PowershellTest(unittest.TestCase):
+class PowershellTest(basetest.TestCase):
 
   def setUp(self):
     self.fs = fake_filesystem.FakeFilesystem()
@@ -98,4 +98,4 @@ class PowershellTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-  unittest.main()
+  basetest.main()

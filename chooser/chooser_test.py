@@ -14,10 +14,10 @@
 
 """Tests for glazier.chooser.chooser."""
 
-from fakefs import fake_filesystem
+from pyfakefs import fake_filesystem
 from glazier.chooser import chooser
 import mock
-import unittest
+from google.apputils import basetest
 
 _TEST_CONF = [{
     'name':
@@ -102,7 +102,7 @@ _TEST_CONF = [{
 }]
 
 
-class ChooserTest(unittest.TestCase):
+class ChooserTest(basetest.TestCase):
 
   @mock.patch.object(chooser, 'tk', autospec=True)
   def setUp(self, unused_tk):
@@ -158,4 +158,4 @@ class ChooserTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-  unittest.main()
+  basetest.main()
